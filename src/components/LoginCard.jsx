@@ -33,8 +33,11 @@ export default function LoginCard() {
 
   const handleLogin = async () => {
     const baseURL = import.meta.env.VITE_API_URL;
+    const url = `${baseURL}/api/users/login`;
+    console.log(url);
+
     try {
-      const res = await fetch(`${baseURL}/api/users/login`, {
+      const res = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
