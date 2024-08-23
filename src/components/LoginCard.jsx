@@ -33,11 +33,9 @@ export default function LoginCard() {
 
   const handleLogin = async () => {
     const baseURL = import.meta.env.VITE_API_URL;
-    const url = `${baseURL}/api/users/login`;
-    console.log(url);
 
     try {
-      const res = await fetch(url, {
+      const res = await fetch(`${baseURL}/api/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -46,7 +44,7 @@ export default function LoginCard() {
       });
 
       const data = await res.json();
-      console.log(data);
+
       if (data.error) {
         return showToast("Error", data.error, "error");
       }
