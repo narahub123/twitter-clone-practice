@@ -8,9 +8,10 @@ const LogoutButton = () => {
   const showToast = useShowToast();
   const setUser = useSetRecoilState(userAtom);
   const handleLogout = async () => {
+    const baseURL = import.meta.env.VITE_API_URL;
     try {
       // fetch
-      const res = await fetch("/api/users/logout", {
+      const res = await fetch(`${baseURL}/api/users/logout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

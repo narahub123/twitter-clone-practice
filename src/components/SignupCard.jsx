@@ -36,8 +36,9 @@ export default function SignupCard() {
   const setUser = useSetRecoilState(userAtom);
 
   const handleSignup = async () => {
+    const baseURL = import.meta.env.VITE_API_URL;
     try {
-      const res = await fetch("/api/users/signup", {
+      const res = await fetch(`${baseURL}/api/users/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
