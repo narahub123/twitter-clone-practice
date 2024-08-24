@@ -40,6 +40,7 @@ export default function LoginCard() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(inputs),
       });
 
@@ -49,7 +50,6 @@ export default function LoginCard() {
         return showToast("Error", data.error, "error");
       }
 
-      setUser(data);
       localStorage.setItem("user-threads", JSON.stringify(data));
       setUser(data);
     } catch (error) {
