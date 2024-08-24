@@ -28,12 +28,14 @@ export default function LoginCard() {
     username: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const showToast = useShowToast();
 
   const handleLogin = async () => {
     const baseURL = import.meta.env.VITE_API_URL;
 
+    setLoading(true);
     try {
       const res = await fetch(`${baseURL}/api/users/login`, {
         method: "POST",
@@ -54,6 +56,8 @@ export default function LoginCard() {
       setUser(data);
     } catch (error) {
       showToast("Error", error, "error");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -124,6 +128,7 @@ export default function LoginCard() {
                   bg: useColorModeValue("gray.700", "gray.800"),
                 }}
                 onClick={handleLogin}
+                isLoading={loading}
               >
                 Login
               </Button>

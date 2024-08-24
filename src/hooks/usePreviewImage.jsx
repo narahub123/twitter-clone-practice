@@ -29,7 +29,7 @@ const usePreviewImage = () => {
   };
 
   // handleImageChange 함수와 imgUrl 상태를 반환하여 다른 컴포넌트에서 사용할 수 있게 함
-  return { handleImageChange, imgUrl };
+  return { handleImageChange, imgUrl, setImgUrl };
 };
 
 export default usePreviewImage; // usePreviewImage 훅을 기본 내보내기로 설정
