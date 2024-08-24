@@ -19,8 +19,6 @@ const HomePage = () => {
 
         const data = await res.json();
 
-        console.log(data);
-
         if (data.error) {
           return showToast("Error", data.error, "error");
         }
