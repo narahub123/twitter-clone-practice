@@ -48,7 +48,7 @@ export default function UpdateProfilePage() {
 
       const data = await res.json();
       if (data.error) {
-        showToast("Error", data.error, "error");
+        return showToast("Error", data.error, "error");
       }
 
       showToast("Success", "Profile uploaded successfully.", "success");
