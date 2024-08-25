@@ -5,16 +5,17 @@ import Actions from "../components/Actions";
 import useShowToast from "../hooks/useShowToast";
 import { formatDistanceToNow } from "date-fns";
 import { DeleteIcon } from "@chakra-ui/icons";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import userAtom from "../atoms/userAtom";
+import postsAtom from "../atoms/postsAtom";
 
 const Post = ({ post, postedBy }) => {
   const baseURL = import.meta.env.VITE_API_URL;
-  const [liked, setLiked] = useState(false);
   const [user, setUser] = useState(null);
+  const currentUser = useRecoilValue(userAtom);
+  const [posts, setPosts] = useRecoilState(postsAtom);
   const showToast = useShowToast();
   const navigate = useNavigate();
-  const currentUser = useRecoilValue(userAtom);
 
   useEffect(() => {
     const getUser = async () => {
@@ -54,7 +55,7 @@ const Post = ({ post, postedBy }) => {
       }
 
       showToast("Success", "Post deleted", "success");
-      
+      setPosts(posts.filter((p) => p._id !== post._id));
     } catch (error) {
       showToast("Error", error.message, "error");
     }
