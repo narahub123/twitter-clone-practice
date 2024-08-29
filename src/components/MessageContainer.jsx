@@ -19,6 +19,7 @@ import {
 } from "../atoms/conversationsAtom";
 import userAtom from "../atoms/userAtom";
 import { useSocket } from "../context/SocketContext";
+import messageSound from "../assets/sounds/message.mp3";
 
 const MessageContainer = () => {
   const baseURL = import.meta.env.VITE_API_URL;
@@ -30,12 +31,18 @@ const MessageContainer = () => {
   const { socket } = useSocket();
   const setConversations = useSetRecoilState(conversationsAtom);
   const messageRef = useRef(null);
-
   useEffect(() => {
     socket?.on("newMessage", (message) => {
       if (selectedConversation._id === message.conversationId) {
         setMessages((prevMessages) => [...prevMessages, message]);
       }
+
+      // notification
+      if (!document.hasFocus()) {
+        const sound = new Audio(messageSound);
+        sound.play();
+      }
+
       setConversations((prev) => {
         const updatedConversations = prev.map((conversation) => {
           if (conversation._id === message.conversationId) {
