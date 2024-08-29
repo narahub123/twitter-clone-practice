@@ -20,6 +20,11 @@ const useGetUserProfile = () => {
           return;
         }
 
+        if (data.isFrozen) {
+          setUser(null);
+          return;
+        }
+
         setUser(data);
       } catch (error) {
         console.log(error);
